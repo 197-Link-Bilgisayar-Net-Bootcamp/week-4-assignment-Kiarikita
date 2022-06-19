@@ -9,7 +9,7 @@ namespace Token.API.Authorization
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            // skip authorization if action is decorated with [AllowAnonymous] attribute
+            // if action has [AllowAnonymous], skip authorization
             var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
             if (allowAnonymous)
                 return;

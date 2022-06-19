@@ -21,11 +21,13 @@ namespace Token.API.Authorization
             var userId = jwtUtils.ValidateJwtToken(token);
             if (userId != null)
             {
-                // attach user to context on successful jwt validation
+                // attach user to context on successfull jwt validation
                 context.Items["User"] = userService.GetById(userId.Value);
             }
 
             await _next(context);
         }
+        /*Token authentication başarısız olursa veya token yoksa, 
+         * HTTP bağlamına eklenmiş kimliği doğrulanmış bir kullanıcı nesnesi olmadığından requestin yalnızca anonim erişmesine izin verilir. */
     }
 }

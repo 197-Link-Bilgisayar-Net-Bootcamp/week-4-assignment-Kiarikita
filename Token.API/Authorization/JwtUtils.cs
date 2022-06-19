@@ -29,7 +29,7 @@ namespace Token.API.Authorization
 
         public string GenerateJwtToken(User user)
         {
-            // generate token that is valid for 15 minutes
+            // 15 dakika sonra süresi dolan kısa ömürlü bir JWT tokenı döndür
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -41,6 +41,8 @@ namespace Token.API.Authorization
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+        //Token, JwtSecurityTokenHandler ile oluşturulur ve appsettings.json dosyasında saklanan secret kullanılarak imzalanır
 
         public int? ValidateJwtToken(string token)
         {
